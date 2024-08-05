@@ -1,16 +1,23 @@
 package guiMenu;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MenuGUI implements ActionListener{
 	
 	private JFrame frame;
+	private JTextField timeTextField;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -42,7 +49,27 @@ public class MenuGUI implements ActionListener{
         menu.add(saveItem);
         menu.add(colorItem);
         menu.add(exitItem);
-		
+        
+//      Action Listener for the menuItems
+        timeItem.addActionListener(this);
+        saveItem.addActionListener(this);
+        colorItem.addActionListener(this);
+        exitItem.addActionListener(this);
+        
+//      Create a panel to hold the label and text field
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        
+        JLabel timeLabel = new JLabel("Current time is: ");
+        timeTextField = new JTextField();
+        timeTextField.setEditable(false); // makes the textfile read-only
+        
+        panel.add(timeLabel, BorderLayout.WEST);
+        panel.add(timeTextField, BorderLayout.CENTER);
+        
+ 
+//      Adding panel to the frame
+        frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
 		// Default commands written when creating a GUI
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,8 +80,32 @@ public class MenuGUI implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		String command = e.getActionCommand();
 		
+		if (command.equals("Time")) {
+//			Get current time
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			String currentTime = sdf.format(new Date());
+			
+//			Debug statement written to console to ensure the command is running
+			System.out.println("Updating time to: " + currentTime);
+			
+//			Update textField with current time
+			timeTextField.setText(currentTime);
+			
+//			Debug statement for the textfield to ensure the correct output is being written
+			System.out.println("TextField contents: " + timeTextField.getText());
+			
+		}
+		else if (command.equals("Save to file")) {
+			System.out.println("You have saved to a file...");
+		}
+		else if (command.equals("Change Color")) {
+			System.out.println("You have changed the color...");
+		}
+		else if (command.equals("Exit")) {
+			System.exit(0); // Exits the program
+		}
 	}
 
 }

@@ -1,10 +1,14 @@
 package guiMenu;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -99,9 +103,26 @@ public class MenuGUI implements ActionListener{
 		}
 		else if (command.equals("Save to file")) {
 			System.out.println("You have saved to a file...");
+			
+			try {
+				FileWriter writer = new FileWriter("log.txt");
+				writer.write("The current time is: ");
+				writer.write(timeTextField.getText()); // writes the textfield to the file
+				writer.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		else if (command.equals("Change Color")) {
 			System.out.println("You have changed the color...");
+//			Generate Random green color 
+			Random rand = new Random();
+			int greenValue = rand.nextInt(205) + 50; // this makes the lowest value 50 and the max value 255
+			Color randomGreen = new Color(0,greenValue, 0);
+			
+//			Sets the background color of the frame
+			frame.getContentPane().setBackground(randomGreen);
 		}
 		else if (command.equals("Exit")) {
 			System.exit(0); // Exits the program

@@ -1,3 +1,17 @@
+/*
+Program Name: CSC372 Module 3 Critical Thinking Assignment
+Author: Anthony Cutis
+Date: August 11, 2024
+
+Purpose of program: This program creates a GUI with a menuBar that contains 4 items that create a dropdown menu. In this menu we have the following items: 
+	Time, Save to file, Change color, and Exit. When we click on each of these items we have an actionlistener method that records when the user clicks 
+	on the item. When a click is performed, there is a method that is performed for each item. The time item displays the current time on the textbox
+	at the top of the screen. The Save to file item saves whatever information is in the textbox to a text file. The Change Color item, changes the 
+	color of the background when pressed. Finally, the Exit item terminates the program when pressed.
+	
+Course: CSC-372
+Instructor: Professor Dr. George 
+*/
 package guiMenu;
 
 import java.awt.BorderLayout;
@@ -15,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -109,6 +124,9 @@ public class MenuGUI implements ActionListener{
 				writer.write("The current time is: ");
 				writer.write(timeTextField.getText()); // writes the textfield to the file
 				writer.close();
+				
+				 // Display a dialog box with the "Saved to file" message
+	            JOptionPane.showMessageDialog(frame, "Saved to file", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
